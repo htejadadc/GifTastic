@@ -2,9 +2,21 @@
 	box-sizing: border-box;
 }
 
-button,
-    div,
-    form,
-    input {
-      margin: 10px;
-    }
+#buttons-display {
+	display: inline-block;
+}
+
+.giphysContent {
+	width: 800px;
+	float: left;
+}
+
+#giphy-view {
+	max-width: 40px;
+	display: inline-block;
+}
+
+#topics-form {
+	width: 200px;
+	float: right;
+}
