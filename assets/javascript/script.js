@@ -15,13 +15,28 @@ function displayGiphy() {
       var gifDiv = $("<div class='item'>");
       var rating = results[i].rating;
       var p = $("<p>").text("Rating: " + rating);
-      var topicImage = $("<img>");
-      topicImage.attr("src", results[i].images.fixed_height.url);
+      var g = $("<img>");
+      g.addClass("gif");
+      g.attr("src", results[i].images.fixed_height_still.url);
+      g.attr("data-still", results[i].images.fixed_height_still.url);
+      g.attr("data-animate", results[i].images.fixed_height.url);
+      g.attr("data-state", "still");
       gifDiv.prepend(p);
-      gifDiv.prepend(topicImage);
+      gifDiv.prepend(g);
       $("#giphy-view").prepend(gifDiv);
     }
+    $(".gif").on("click", function() {
+      var state = $(this).attr("data-state");
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"))
+        $(this).attr("data-state","animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"))
+        $(this).attr("data-state","still");
+      }  
+    });
   });
+  
 };
 
 function buttonsDisplay() {
