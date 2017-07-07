@@ -1,7 +1,7 @@
 var topics = ["Surfing", "Free-Diving", "Spear-Fishing", "Rugby"];
     
 function displayGiphy() {
-
+  $("#giphy-view").empty();
   var topic = $(this).attr("entry-name");
   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=dc6zaTOxFJmzC&limit=10";
  
@@ -21,8 +21,8 @@ function displayGiphy() {
       g.attr("data-still", results[i].images.fixed_height_still.url);
       g.attr("data-animate", results[i].images.fixed_height.url);
       g.attr("data-state", "still");
-      gifDiv.prepend(p);
       gifDiv.prepend(g);
+      gifDiv.prepend(p);
       $("#giphy-view").prepend(gifDiv);
     }
     $(".gif").on("click", function() {
@@ -35,8 +35,7 @@ function displayGiphy() {
         $(this).attr("data-state","still");
       }  
     });
-  });
-  
+  });  
 };
 
 function buttonsDisplay() {
@@ -52,14 +51,16 @@ function buttonsDisplay() {
   }
 };
 
-$("#add-topic").on("click", function(event) {
-  event.preventDefault();        
-  var topic = $("#topics-input").val().trim();        
-  topics.push(topic);       
-  buttonsDisplay();
-  $("#topics-input").val('');
-});
+function newTopic() {
+  $("#add-topic").on("click", function(event) {
+    event.preventDefault();        
+    var topic = $("#topics-input").val().trim();        
+    topics.push(topic);       
+    buttonsDisplay();
+    $("#topics-input").val('');
+  });
+};
 
 $(document).on("click", ".topic", displayGiphy);
-
 buttonsDisplay();
+newTopic();
